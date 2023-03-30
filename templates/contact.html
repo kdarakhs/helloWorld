@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block page_title %}Contact Me!{% endblock %}
+
+{% block page_heading %}Do you want to be contacted?{% endblock %}
+
+{% block page_content %}
+
+    {% if form_submitted and request.form.get('inputFirstName') and request.form.get('inputLastName') and
+            request.form.get('inputEmail') and request.form.get('inputMajor') %}
+        <div class="col-12">
+            <h2>Thank you for completing this form!</h2>
+        </div>
+        <div class="col-md-6">
+            <p>First Name:</p>
+        </div>
+        <div class="col-md-6">
+            <p>{{ request.form.get('inputFirstName') }}</p>
+        </div>
+                <div class="col-md-6">
+            <p>Last Name:</p>
+        </div>
+        <div class="col-md-6">
+            <p>{{ request.form.get('inputLastName') }}</p>
+        </div>
+                <div class="col-md-6">
+            <p>Email:</p>
+        </div>
+        <div class="col-md-6">
+            <p>{{ request.form.get('inputEmail') }}</p>
+        </div>
+                <div class="col-md-6">
+            <p>Major:</p>
+        </div>
+        <div class="col-md-6">
+            <p>{{ request.form.get('inputMajor') }}</p>
+        </div>
+        <div class="col-md-6">
+            <p>Agree to be contacted:
+        </div>
+        <div class="col-md-6">
+            <p>{{ 'Yes' if request.form.get('agree_check') else 'No' }}</p>
+        </div>
+
+    {% else %}
+
+        {% if form_submitted %}
+            <div class="col-12">
+                <h6>Please fill out all sections of this form and indicate whether you'd like to be contacted.</h6>
+            </div>
+        {% endif %}
+
+        <form action="{{ url_for('contact') }}" method="post">
+            <div class="mb-3">
+                <label for="inputFirstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="inputFirstName" name="inputFirstName">
+            </div>
+            <div class="mb-3">
+                <label for="inputLastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="inputLastName" name="inputLastName">
+            </div>
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+            </div>
+            <div class="mb-3">
+                <label for="inputMajor" class="form-label">Major</label>
+                <input type="text" class="form-control" id="inputMajor" name="inputMajor">
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="agree_check" name="agree_check">
+                    <label class="form-check-label" for="agree_check">
+                        I agree to be contacted.
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}
