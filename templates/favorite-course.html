@@ -4,6 +4,8 @@
 
 {% block page_heading %}What's your favorite course?{% endblock %}
 
+<!-- Taking the input from the URL and returning the combined course and
+course number to the user. -->
 {% block page_content %}
     <p> You inputted your favorite course as: {{ request.args.get('course_name') }}
         {{ request.args.get('course_number') }} </p>

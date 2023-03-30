@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
+<!-- Form for user to fill out contact information. -->
 {% block page_title %}Contact Me!{% endblock %}
 
 {% block page_heading %}Do you want to be contacted?{% endblock %}
 
 {% block page_content %}
 
+    <!-- Checks if the form was submitted and all needed information was inputted,
+    then shows user their inputs. -->
     {% if form_submitted and request.form.get('inputFirstName') and request.form.get('inputLastName') and
             request.form.get('inputEmail') and request.form.get('inputMajor') %}
         <div class="col-12">
@@ -38,18 +41,25 @@
         <div class="col-md-6">
             <p>Agree to be contacted:
         </div>
+        <!-- Asks user if they want to be contacted (by not checking the box they indicate
+        that they don't want to be contacted). -->
         <div class="col-md-6">
             <p>{{ 'Yes' if request.form.get('agree_check') else 'No' }}</p>
         </div>
 
+    <!-- If the form... -->
     {% else %}
 
+        <!-- ...was submitted but all of the needed inputs weren't filled out,
+        then they get a message asking them to complete the form and the still fillable
+        form -->
         {% if form_submitted %}
             <div class="col-12">
                 <h6>Please fill out all sections of this form and indicate whether you'd like to be contacted.</h6>
             </div>
         {% endif %}
 
+        <!-- ...but if the form wasn't submitted (yet) it just shows the form -->
         <form action="{{ url_for('contact') }}" method="post">
             <div class="mb-3">
                 <label for="inputFirstName" class="form-label">First Name</label>
