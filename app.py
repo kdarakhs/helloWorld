@@ -117,8 +117,6 @@ def student_view(student_id):
 
 
 @app.route('/student/create', methods=['GET', 'POST'])
-@login_required
-@role_required(['ADMIN', 'MANAGER'])
 def student_create():
     if request.method == 'GET':
         majors = Major.query.order_by(Major.major) \
