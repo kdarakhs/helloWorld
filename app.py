@@ -76,8 +76,6 @@ def logout():
 
 
 @app.route('/student/view')
-@login_required
-@role_required(['ADMIN', 'MANAGER'])
 def student_view_all():
     students = Student.query.outerjoin(Major, Student.major_id == Major.major_id) \
         .add_entity(Major) \
