@@ -87,8 +87,6 @@ def student_view_all():
 
 
 @app.route('/student/view/<int:student_id>')
-@login_required
-@role_required(['ADMIN', 'MANAGER', 'STUDENT'])
 def student_view(student_id):
     if current_user.role in ['MANAGER', 'ADMIN']:
         student = Student.query.filter_by(student_id=student_id).first()
